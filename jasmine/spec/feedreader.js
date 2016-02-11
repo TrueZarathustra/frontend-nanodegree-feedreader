@@ -82,10 +82,10 @@ $(function() {
          * a single .entry element within the .feed container.
          */
         beforeEach(function(done) {
-        loadFeed(0, function() {
-            done();
+            loadFeed(0, function() {
+                done();
+            });
         });
-    });
         
         it('At least one .entry exists', function() {
             expect($('.feed').find('.entry').length).toBeGreaterThan(0);
@@ -95,9 +95,25 @@ $(function() {
 
 
     describe('New Feed Selection', function() {
-        /* TODO: Write a test that ensures when a new feed is loaded
+        
+        var oldFeed = '',
+            currentFeed = '';
+        
+        beforeEach(function(done) {
+            oldFeed = $('.feed').html();
+            currentFeed = loadFeed(1, function() {
+                done();
+            });
+        });
+
+        /* Test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
-         * Remember, loadFeed() is asynchronous.
          */
+        it('loadFeed actually changes content', function() {
+            expect(oldFeed).not.toEqual(currentFeed);
+        });
+
     });
+
+
 }());
