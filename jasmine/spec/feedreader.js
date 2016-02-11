@@ -26,17 +26,29 @@ $(function() {
             expect(allFeeds.length).not.toBe(0);
         });
 
-
         /* TODO: Write a test that loops through each feed
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
-
+         it('URLs are correctly defined', function() {
+            var len = allFeeds.length;
+            for (i=0; i<len; i++) {
+                expect(allFeeds[i].url).toBeDefined();
+                expect(allFeeds[i].url.length).not.toBe(0);
+            }
+         });
 
         /* TODO: Write a test that loops through each feed
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
+         it('Names are correctly defined', function() {
+            var len = allFeeds.length;
+            for (i=0; i<len; i++) {
+                expect(allFeeds[i].name).toBeDefined();
+                expect(allFeeds[i].name.length).not.toBe(0);
+            }
+         });
     });
 
 
