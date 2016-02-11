@@ -1,13 +1,9 @@
 /* feedreader.js
  *
  * This is the spec file that Jasmine will read and contains
- * all of the tests that will be run against your application.
+ * all of the tests that will be run against  application.
  */
 
-/* We're placing all of our tests within the $() function,
- * since some of these tests may require DOM elements. We want
- * to ensure they don't run until the DOM is ready.
- */
 $(function() {
     /* This is our first test suite - a test suite just contains
     * a related set of tests. This suite is all about the RSS
@@ -23,7 +19,10 @@ $(function() {
          */
         it('are defined', function() {
             expect(allFeeds).toBeDefined();
-            expect(allFeeds.length).toBeGreaterThan(0);
+
+            if(typeof allFeeds !== "undefined") {
+                expect(allFeeds.length).toBeGreaterThan(0);
+            }
         });
 
         /* Test loops through each feed
@@ -32,9 +31,12 @@ $(function() {
          */
          it('URLs are correctly defined', function() {
             var len = allFeeds.length;
-            for (i=0; i<len; i++) {
+            for (var i=0; i<len; i++) {
                 expect(allFeeds[i].url).toBeDefined();
-                expect(allFeeds[i].url.length).toBeGreaterThan(0);
+
+                if(typeof allFeeds[i].url !== "undefined") {
+                    expect(allFeeds[i].url.length).toBeGreaterThan(0);
+                }
             }
          });
 
@@ -44,23 +46,24 @@ $(function() {
          */
          it('Names are correctly defined', function() {
             var len = allFeeds.length;
-            for (i=0; i<len; i++) {
+            for (var i=0; i<len; i++) {
                 expect(allFeeds[i].name).toBeDefined();
-                expect(allFeeds[i].name.length).toBeGreaterThan(0);
+                if(typeof allFeeds[i].name !== "undefined") {
+                    expect(allFeeds[i].name.length).toBeGreaterThan(0);
+                }
             }
          });
     });
 
-
     describe('The menu', function() {
 
         /* Test  ensures the menu element is
-         * hidden by default. 
+         * hidden by default.
          */
         it('Menu is hidden by default', function() {
             expect($('body').hasClass('menu-hidden')).toBe(true);
         });
-   
+
 
          /* Test ensures the menu changes
           * visibility when the menu icon is clicked. This test
@@ -86,19 +89,18 @@ $(function() {
                 done();
             });
         });
-        
+
         it('At least one .entry exists', function() {
             expect($('.feed').find('.entry').length).toBeGreaterThan(0);
         });
 
      });
 
-
     describe('New Feed Selection', function() {
-        
+
         var oldFeed = '',
             currentFeed = '';
-        
+
         beforeEach(function(done) {
             oldFeed = $('.feed').html();
             currentFeed = loadFeed(1, function() {
@@ -114,6 +116,5 @@ $(function() {
         });
 
     });
-
 
 }());
